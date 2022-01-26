@@ -32,6 +32,10 @@ export class Player {
       return true;
     }
 
+    if (card2.rank === 'A' && ['K', 'Q', 'J', '10'].indexOf(card1.rank) !== -1) {
+      return true;
+    }
+
     return false;
   }
 
