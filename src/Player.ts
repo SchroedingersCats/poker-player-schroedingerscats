@@ -55,7 +55,7 @@ export class Player {
           (card1.rank === "3" && activePlayers.length < 3) ||
           (card1.rank === "2" && activePlayers.length < 3)
         ) {
-          return 5000;
+          return 10000;
         } else if (gameState.bet_index === 0) {
           return gameState.minimum_raise;
         }
@@ -91,7 +91,7 @@ export class Player {
 
       if (sameCard > 1) {
         // Two-Pair or Set (3 of a kind)
-        return 5000;
+        return 10000;
       } else if (sameCard > 0) {
         // One Pair
         return toCall;
