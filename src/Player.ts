@@ -107,11 +107,13 @@ export class Player {
     }
 
     const bannerRemains =
-      activePlayers.filter((x) => x.name === "Bannerzwoi off" || x.name === "")
-        .length > 0;
+      activePlayers.length < 4 &&
+      activePlayers.filter(
+        (x) => x.name === "Bannerzwoi off" || x.name === "Robby Stone Face"
+      ).length > 0;
 
     if (bannerRemains && gameState.bet_index < 1) {
-      return gameState.minimum_raise;
+      return toCall;
     } else {
       return 0;
     }
