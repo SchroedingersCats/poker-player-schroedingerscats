@@ -13,19 +13,23 @@ export class Player {
 
     console.log(`We are ${ourPlayer}`);
 
-    betCallback(this.howManyMoneyShouldWeSet(ourPlayer.hole_cards, commCards, gameState));
+    betCallback(
+      this.howManyMoneyShouldWeSet(ourPlayer.hole_cards, commCards, gameState)
+    );
 
     console.error(gameState);
   }
 
-  howManyMoneyShouldWeSet = (cards: Card[], commCards: Card[], gameState: GameState) => {
+  howManyMoneyShouldWeSet = (
+    cards: Card[],
+    commCards: Card[],
+    gameState: GameState
+  ) => {
     const card1 = cards[0];
     const card2 = cards[1];
-    
+
     const ourId = gameState.in_action;
     const ourPlayer = gameState.players[ourId];
-
-    const toCall = gameState.current_buy_in - ourPlayer.bet;
 
     if (card1.rank === card2.rank) {
       if (
@@ -51,7 +55,9 @@ export class Player {
       return 5000;
     }
 
-    if (card1.rank) return 0;
+    const toCall = gameState.current_buy_in - ourPlayer.bet;
+
+    return toCall === gameState.small_blind * 2 ? gameState.small_blind * 2 : 0;
   };
 
   public showdown(gameState: any): void {}
