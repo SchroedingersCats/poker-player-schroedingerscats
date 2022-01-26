@@ -66,17 +66,21 @@ export class Player {
         return toCall;
       }
     } else {
-      let sameCard = false;
+      let sameCard = 0;
       for (let index = 0; index < communityCards.length; index++) {
         if (
           communityCards[index].rank == card1.rank ||
           communityCards[index].rank == card2.rank
         ) {
-          sameCard = true;
+          sameCard++;
         }
       }
 
-      if (sameCard) {
+      if (sameCard > 1) {
+        // Two-Pair or Set (3 of a kind)
+        return 5000;
+      } else if (sameCard > 0) {
+        // One Pair
         return toCall;
       }
     }
