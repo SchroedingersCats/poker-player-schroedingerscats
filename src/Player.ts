@@ -30,6 +30,7 @@ export class Player {
 
     const ourId = gameState.in_action;
     const ourPlayer = gameState.players[ourId];
+    const toCall = gameState.current_buy_in - ourPlayer.bet;
 
     if (card1.rank === card2.rank) {
       if (
@@ -55,9 +56,14 @@ export class Player {
       return 5000;
     }
 
-    return 0;
+    if (
+      ["A", "K", "Q", "J", "10", "9", "8"].indexOf(card1.rank) !== -1 &&
+      ["A", "K", "Q", "J", "10", "9", "8"].indexOf(card2.rank) !== -1
+    ) {
+      return gameState.small_blind * 2;
+    }
 
-    // const toCall = gameState.current_buy_in - ourPlayer.bet;
+    return 0;
 
     // return toCall === gameState.small_blind * 2 ? gameState.small_blind * 2 : 0;
   };
