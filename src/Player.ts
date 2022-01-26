@@ -34,6 +34,10 @@ export class Player {
 
     const communityCards = gameState.community_cards;
 
+    const activePlayers = gameState.players.filter(
+      (x) => x.status === "active"
+    );
+
     if (communityCards.length === 0) {
       if (card1.rank === card2.rank) {
         if (
@@ -85,8 +89,14 @@ export class Player {
       }
     }
 
-    return 0;
+    const bannerRemains =
+      activePlayers.filter((x) => x.name === "Bannerzwoi off").length > 0;
 
+    if (bannerRemains) {
+      return gameState.minimum_raise;
+    } else {
+      return 0;
+    }
     // return toCall === gameState.small_blind * 2 ? gameState.small_blind * 2 : 0;
   };
 
