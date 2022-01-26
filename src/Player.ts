@@ -106,15 +106,7 @@ export class Player {
       }
     }
 
-    const bannerRemains =
-      activePlayers.length < 4 &&
-      activePlayers.filter((x) => x.name === "Robby Stone Face").length > 0;
-
-    if (bannerRemains && gameState.bet_index < 1) {
-      return toCall;
-    } else {
-      return 0;
-    }
+    return 0;
     // return toCall === gameState.small_blind * 2 ? gameState.small_blind * 2 : 0;
   };
 
