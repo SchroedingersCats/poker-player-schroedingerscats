@@ -32,35 +32,53 @@ export class Player {
     const ourPlayer = gameState.players[ourId];
     const toCall = gameState.current_buy_in - ourPlayer.bet;
 
-    if (card1.rank === card2.rank) {
+    const communityCards = gameState.community_cards;
+
+    if (communityCards.length === 0) {
+      if (card1.rank === card2.rank) {
+        if (
+          card1.rank === "A" ||
+          card1.rank === "K" ||
+          card1.rank === "Q" ||
+          card1.rank === "J" ||
+          card1.rank === "10" ||
+          card1.rank === "9" ||
+          card1.rank === "8" ||
+          card1.rank === "7" ||
+          card1.rank === "6" ||
+          card1.rank === "5"
+        ) {
+          return 5000;
+        }
+      }
+
       if (
-        card1.rank === "A" ||
-        card1.rank === "K" ||
-        card1.rank === "Q" ||
-        card1.rank === "J" ||
-        card1.rank === "10" ||
-        card1.rank === "9" ||
-        card1.rank === "8" ||
-        card1.rank === "7" ||
-        card1.rank === "6" ||
-        card1.rank === "5"
+        ["A", "K", "Q", "J", "10"].indexOf(card2.rank) !== -1 &&
+        ["A", "K", "Q", "J", "10"].indexOf(card1.rank) !== -1
       ) {
         return 5000;
       }
-    }
 
-    if (
-      ["A", "K", "Q", "J", "10"].indexOf(card2.rank) !== -1 &&
-      ["A", "K", "Q", "J", "10"].indexOf(card1.rank) !== -1
-    ) {
-      return 5000;
-    }
+      if (
+        ["A", "K", "Q", "J", "10", "9", "8"].indexOf(card1.rank) !== -1 &&
+        ["A", "K", "Q", "J", "10", "9", "8"].indexOf(card2.rank) !== -1
+      ) {
+        return toCall;
+      }
+    } else {
+      let sameCard = false;
+      for (let index = 0; index < communityCards.length; index++) {
+        if (
+          communityCards[index].rank == card1.rank ||
+          communityCards[index].rank == card2.rank
+        ) {
+          sameCard = true;
+        }
+      }
 
-    if (
-      ["A", "K", "Q", "J", "10", "9", "8"].indexOf(card1.rank) !== -1 &&
-      ["A", "K", "Q", "J", "10", "9", "8"].indexOf(card2.rank) !== -1
-    ) {
-      return toCall;
+      if (sameCard) {
+        return toCall;
+      }
     }
 
     return 0;
