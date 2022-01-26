@@ -65,7 +65,15 @@ export class Player {
         ["A", "K", "Q", "J", "10"].indexOf(card2.rank) !== -1 &&
         ["A", "K", "Q", "J", "10"].indexOf(card1.rank) !== -1
       ) {
-        return gameState.minimum_raise;
+        if (gameState.bet_index === 0) {
+          return gameState.minimum_raise;
+        } else {
+          if ((toCall * 100) / ourPlayer.stack < 10) {
+            return toCall;
+          } else {
+            return 0;
+          }
+        }
       }
 
       if (
