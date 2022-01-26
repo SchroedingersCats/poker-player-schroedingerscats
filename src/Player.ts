@@ -108,9 +108,7 @@ export class Player {
 
     const bannerRemains =
       activePlayers.length < 4 &&
-      activePlayers.filter(
-        (x) => x.name === "Bannerzwoi off" || x.name === "Robby Stone Face"
-      ).length > 0;
+      activePlayers.filter((x) => x.name === "Robby Stone Face").length > 0;
 
     if (bannerRemains && gameState.bet_index < 1) {
       return toCall;
