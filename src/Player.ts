@@ -45,14 +45,19 @@ export class Player {
           card1.rank === "K" ||
           card1.rank === "Q" ||
           card1.rank === "J" ||
-          card1.rank === "10" ||
-          card1.rank === "9" ||
-          card1.rank === "8" ||
-          card1.rank === "7" ||
-          card1.rank === "6" ||
-          card1.rank === "5"
+          (card1.rank === "10" && activePlayers.length < 4) ||
+          (card1.rank === "9" && activePlayers.length < 4) ||
+          (card1.rank === "8" && activePlayers.length < 4) ||
+          (card1.rank === "7" && activePlayers.length < 4) ||
+          (card1.rank === "6" && activePlayers.length < 4) ||
+          (card1.rank === "5" && activePlayers.length < 3) ||
+          (card1.rank === "4" && activePlayers.length < 3) ||
+          (card1.rank === "3" && activePlayers.length < 3) ||
+          (card1.rank === "2" && activePlayers.length < 3)
         ) {
           return 5000;
+        } else if (gameState.bet_index === 0) {
+          return gameState.minimum_raise;
         }
       }
 
@@ -60,7 +65,7 @@ export class Player {
         ["A", "K", "Q", "J", "10"].indexOf(card2.rank) !== -1 &&
         ["A", "K", "Q", "J", "10"].indexOf(card1.rank) !== -1
       ) {
-        return 5000;
+        return gameState.minimum_raise;
       }
 
       if (
