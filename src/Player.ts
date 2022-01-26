@@ -60,7 +60,7 @@ export class Player {
       ["A", "K", "Q", "J", "10", "9", "8"].indexOf(card1.rank) !== -1 &&
       ["A", "K", "Q", "J", "10", "9", "8"].indexOf(card2.rank) !== -1
     ) {
-      return gameState.small_blind * 2;
+      return toCall;
     }
 
     return 0;
