@@ -67,7 +67,11 @@ export class Player {
         ["A", "K", "Q", "J", "10", "9", "8"].indexOf(card1.rank) !== -1 &&
         ["A", "K", "Q", "J", "10", "9", "8"].indexOf(card2.rank) !== -1
       ) {
-        return toCall;
+        if ((toCall * 100) / ourPlayer.stack < 10) {
+          return toCall;
+        } else {
+          return 0;
+        }
       }
     } else {
       let sameCard = 0;
@@ -90,9 +94,10 @@ export class Player {
     }
 
     const bannerRemains =
-      activePlayers.filter((x) => x.name === "Bannerzwoi off").length > 0;
+      activePlayers.filter((x) => x.name === "Bannerzwoi off" || x.name === "")
+        .length > 0;
 
-    if (bannerRemains) {
+    if (bannerRemains && gameState.bet_index < 1) {
       return gameState.minimum_raise;
     } else {
       return 0;
