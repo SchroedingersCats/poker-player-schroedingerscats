@@ -23,9 +23,13 @@ export class Player {
     const card2 = cards[1];
 
     if (card1.rank === card2.rank) {
-      if (card1.rank === 'A' || card1.rank === 'K' || card1.rank === 'Q' || card1.rank === 'J' || card1.rank === '10' || card1.rank === '9' || card1.rank === '8' || card1.rank === '7' || card1.rank === '6' || card1.rank === '5' ) {
+      if (card1.rank === 'A' || card1.rank === 'K' || card1.rank === 'Q' || card1.rank === 'J' || card1.rank === '10' || card1.rank === '9' || card1.rank === '8' || card1.rank === '7' || card1.rank === '6' || card1.rank === '5') {
         return true;
       }
+    }
+
+    if (card1.rank === 'A' && ['K', 'Q', 'J', '10'].indexOf(card2.rank) !== -1) {
+      return true;
     }
 
     return false;
