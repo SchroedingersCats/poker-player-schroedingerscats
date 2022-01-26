@@ -55,9 +55,11 @@ export class Player {
       return 5000;
     }
 
-    const toCall = gameState.current_buy_in - ourPlayer.bet;
+    return 0;
 
-    return toCall === gameState.small_blind * 2 ? gameState.small_blind * 2 : 0;
+    // const toCall = gameState.current_buy_in - ourPlayer.bet;
+
+    // return toCall === gameState.small_blind * 2 ? gameState.small_blind * 2 : 0;
   };
 
   public showdown(gameState: any): void {}
